@@ -1,1 +1,8 @@
 List of your habits are here
+
+<% @habits.each do |habit| %>
+  <li><%= link_to habit.name, habit_path(habit) %> 
+      <%= link_to "%", edit_habit_path(habit) %>
+      <%= link_to "x", habit_path(habit.id, "method" => "delete") %></li>
+<% end %>
+
