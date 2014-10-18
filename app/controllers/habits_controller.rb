@@ -1,7 +1,11 @@
 class HabitsController < ApplicationController
   def index
-    @habit = Habit.new()
-    @habits = Habit.all()
+      @habit = Habit.new()
+      @habits = Habit.all()
+      respond_to do |format|
+        format.json { render json: @habits }
+        format.html { render :index }
+      end
   end
   def show
     @habit = Habit.find(params['id'])
