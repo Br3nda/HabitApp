@@ -1,8 +1,15 @@
-List of your habits are here
-
-<% @habits.each do |habit| %>
-  <li><%= link_to habit.name, habit_path(habit) %> 
-      <%= link_to "%", edit_habit_path(habit) %>
-      <%= link_to "x", habit_path(habit.id, "method" => "delete") %></li>
+<%= form_for @habit, url: {action: "create"}, html: {class: "pure-form"} do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit "Create" %>
 <% end %>
+
+
+<div id="habits">
+  <h2>Your Habits:</h2>
+  <ul id="habits_list">
+  <% @habits.each do |habit| %>
+    <li><%= link_to habit.name, habit_path(habit) %> </li>
+  <% end %>
+  </ul>
+</div>
 

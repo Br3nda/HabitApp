@@ -1,16 +1,26 @@
 class HabitsController < ApplicationController
   def index
+    @habit = Habit.new()
     @habits = Habit.all()
   end
   def show
-    Habit.find(habit_id)
+    @habit = Habit.find(params['id'])
   end
-  def edit
-    Habit.find(habit_id)
-  end
+  #def edit
+  #  @habit = Habit.find(habit_id)
+  #end
   def create
-    @habit = Habit.new(habit_params)
-    @habit.save()
-    redirect_to(habit_show_path(deck_id))
+    habit = Habit.find_by(name: habit_params['name'])
+    if not habit
+      habit = Habit.new(habit_params)
+      habit.save()
+    end
+    #todo, make the gerund record
   end
+  def subscribe
+  end
+  def habit_params
+    params.require(:habit).permit(:name)
+  end
+
 end
